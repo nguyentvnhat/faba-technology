@@ -21,11 +21,11 @@ function sortLargestNumberOfArray($arrayNumbers = [])
     }
 }
 $arrayExample = [14, 11, 20, 19, 17, 5, 1, 12, 13];
-// echo 'sortLargestNumberOfArray: ';
+
+// Open to Excute
 // sortLargestNumberOfArray($arrayExample);
 
 
-detectRoomForRent();
 function generateRoomSlot($n) {
     $arrayIndex = [];
    
@@ -45,33 +45,33 @@ function generateRoomSlot($n) {
 }
 function detectRoomForRent()
 {
-    // $rooms = generateRoomSlot(4);
-    $rooms = [
-        [
-            'index' => 1,
-            'start_time' => 2,
-            'end_time' => 3, 
-            'rental' => 4,
-        ],
-        [
-            'index' => 2,
-            'start_time' => 1,
-            'end_time' => 3, 
-            'rental' => 6,
-        ],
-        [
-            'index' => 3,
-            'start_time' => 1,
-            'end_time' => 2, 
-            'rental' => 3,
-        ],
-        [
-            'index' => 4,
-            'start_time' => 3,
-            'end_time' => 4, 
-            'rental' => 2,
-        ],
-    ];
+    $rooms = generateRoomSlot(9);
+    // $rooms = [
+    //     [
+    //         'index' => 1,
+    //         'start_time' => 2,
+    //         'end_time' => 3, 
+    //         'rental' => 4,
+    //     ],
+    //     [
+    //         'index' => 2,
+    //         'start_time' => 1,
+    //         'end_time' => 3, 
+    //         'rental' => 6,
+    //     ],
+    //     [
+    //         'index' => 3,
+    //         'start_time' => 1,
+    //         'end_time' => 2, 
+    //         'rental' => 3,
+    //     ],
+    //     [
+    //         'index' => 4,
+    //         'start_time' => 3,
+    //         'end_time' => 4, 
+    //         'rental' => 2,
+    //     ],
+    // ];
     echo "<table>
     <tr>
         <td width='15%'>Index</td>
@@ -104,34 +104,34 @@ function detectRoomForRent()
         $roomIndex = 'index_'.$room['index'];
         if (empty($slots))
         {
-            $slots[$roomIndex][] = $room;
-            $slots[$roomIndex]['total_rental'] = $room['rental'];
+            $slots['index_'.$room['index']][] = $room;
+            $slots['index_'.$room['index']]['total_rental'] = $room['rental'];
 
 
-            if ($maxCurrent < $slots[$roomIndex]['total_rental']) {
-                $maxCurrent = $slots[$roomIndex]['total_rental'];
+            if ($maxCurrent < $slots['index_'.$room['index']]['total_rental']) {
+                $maxCurrent = $slots['index_'.$room['index']]['total_rental'];
                 $currentIndex = $room['index'];
             }
             continue;
         } 
-       
+
         for ($i = 1; $i <= count($slots); $i++) {
             if(isset($slots['index_'.$i])) {
                 foreach($slots['index_'.$i] as $k => $s) {
-
-                    if ($s['start_time'] == $room['start_time'] || $s['end_time'] == $room['end_time']) {
-                        $slots[$roomIndex][] = $room;
-                        $slots[$roomIndex]['total_rental'] = $room['rental'];
+                    // dd($slots['index_'.$i][$k]['start_time']);
+                    if ($slots['index_'.$i][$k]['start_time'] == $room['start_time'] || $slots['index_'.$i][$k]['end_time'] == $room['end_time']) {
+                       
+                        $slots['index_'.$room['index']][] = $room;
+                        $slots['index_'.$room['index']]['total_rental'] = $room['rental'];
                         continue 3;
 
-                    } else if ($s['start_time'] != $room['start_time'] || $s['end_time'] != $room['end_time']) {
-                        $roomIndexChild = $slots['index_'.$i];
+                    } else if ($slots['index_'.$i][$k]['start_time'] != $room['start_time'] && $slots['index_'.$i][$k]['end_time'] != $room['end_time']) {
                         foreach($slots['index_'.$i] as $item) {
                             
                             if ($item['index'] != $rooms[$key]['index'] )
                             {
                                 $slots['index_'.$i][] = $room;
-                               
+                            
                                 $slots['index_'.$i]['total_rental'] = $slots['index_'.$i]['total_rental'] + $room['rental'];
 
                                 if ($maxCurrent < $slots['index_'.$i]['total_rental']) {
@@ -149,11 +149,10 @@ function detectRoomForRent()
                         }
                     }
                 }
-            }
-            
+            }        
         }
     }
-
+    
     echo '====================================<br/>';
     echo "<table>
     <tr>
@@ -178,5 +177,6 @@ function detectRoomForRent()
         echo '</table>';
     }
 }
-
+// Open to excute
+detectRoomForRent();
 @endphp
