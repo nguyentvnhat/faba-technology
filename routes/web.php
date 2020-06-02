@@ -22,7 +22,8 @@ Route::get('/lession-4', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user/create', 'UserController@create')->middleware('create_user');
+Route::get('/user/edit', 'UserController@edit')->middleware('edit_user');
+Route::get('/user/view', 'UserController@view')->middleware('view_user');
+Route::get('/not_allowed', 'UserController@notAllowed');
+Route::get('/show_database', 'UserController@showDatabase');

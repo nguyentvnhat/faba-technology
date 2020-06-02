@@ -11,29 +11,28 @@ class RolesAndPermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-
         \DB::table('permissions')->insert([
             [
-                'id' => 1,
-                'permission_name' => 'create_permission'
+                'permission_id' => 1,
+                'permission_name' => 'create_user'
             ],
             [
-                'id' => 2,
-                'permission_name' => 'edit_permission'
+                'permission_id' => 2,
+                'permission_name' => 'edit_user'
             ],
             [
-                'id' => 3,
-                'permission_name' => 'assign_permission'
+                'permission_id' => 3,
+                'permission_name' => 'view_user'
             ],
         ]);
 
         \DB::table('roles')->insert([
             [
-                'id' => 1,
+                'role_id' => 1,
                 'role_name' => 'Manager'
             ],
             [
-                'id' => 1,
+                'role_id' => 2,
                 'role_name' => 'Staff'
             ],
         ]);
